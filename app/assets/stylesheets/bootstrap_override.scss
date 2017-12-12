@@ -1,0 +1,85 @@
+.fixed-table-container tbody td {
+    border-left: none;
+}
+.fixed-table-container thead th {
+    border-left: none;
+}
+.fixed-table-container {
+    border: none;   
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+input:-moz-autofill {
+    -moz-text-fill-color: black;
+    -moz-box-shadow: 0 0 0px 1000px white inset;
+}
+input:-o-autofill {
+    -o-text-fill-color: black;
+    -o-box-shadow: 0 0 0px 1000px white inset;
+}
+input:-khtml-autofill {
+    -khtml-text-fill-color: black;
+    -khtml-box-shadow: 0 0 0px 1000px white inset;
+}
+input:focus:-webkit-autofill {
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+input:focus:-moz-autofill {
+    -moz-text-fill-color: black;
+    -moz-box-shadow: 0 0 0px 1000px white inset;
+}
+input:focus:-o-autofill {
+    -o-text-fill-color: black;
+    -o-box-shadow: 0 0 0px 1000px white inset;
+}
+input:focus:-khtml-autofill {
+    -khtml-text-fill-color: black;
+    -khtml-box-shadow: 0 0 0px 1000px white inset;
+}
+
+section.devise {
+        .form-group {
+        margin-bottom: 25px;
+        input,
+        textarea {
+            padding: 20px;
+        }
+        input.form-control {
+            height: auto;
+        }
+        textarea.form-control {
+            height: 236px;
+        }
+    }
+    .form-control:focus {
+        border-color: $theme-primary;
+        box-shadow: none;
+    }
+    ::-webkit-input-placeholder {
+       @include heading-font;
+       font-weight: 700;
+       color: $gray-lighter;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+       @include heading-font;
+       font-weight: 700;
+       color: $gray-lighter;
+    }
+    ::-moz-placeholder {  /* Firefox 19+ */
+       @include heading-font;
+       font-weight: 700;
+       color: $gray-lighter;
+    }
+    :-ms-input-placeholder {  
+       @include heading-font;
+       font-weight: 700;
+       color: $gray-lighter;
+    }
+    .text-danger {
+        color: $theme-danger;
+    }
+}

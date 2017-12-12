@@ -1,0 +1,42 @@
+<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <div style="margin-top: -13px;">
+            <%= link_to "#page-top", class: "navbar-brand page-scroll" do %>
+                
+            <%= image_tag "logo.jpg", size: 45, style: "display:inline;", class: "img-rounded" %> <span style="color: #e60000; font-size: 40px; font-family: 'Tangerine', cursive; font-weight: 700;">SL</span><span style="color: white; font-size: 30px;font-family: 'Tangerine', cursive; font-weight: 700;"> Autos</span> <% end %>
+               
+            </div>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <%= link_to "", "#page-top" %>
+                </li>
+                <li>
+                    <%= link_to "Sell", "#sell", class: "page-scroll"  %>
+                </li>
+                <li>
+                    <%= link_to "Buy", "#buy", class: "page-scroll"  %>
+                </li>
+                <li>
+                    <%= link_to "Services", "#services", class: "page-scroll" %>
+                </li>
+                <li>
+                    <%= link_to "Team", "#team", class: "page-scroll" %>
+                </li>
+                <li>
+                    <%= link_to "Contact", "#contact", class: "page-scroll" %>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
