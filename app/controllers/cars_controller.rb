@@ -31,7 +31,10 @@ class CarsController < ApplicationController
   # POST /cars.json
   def create
     @car = Car.new(car_params)
-    @car.features["Transmission"] = params["transmission"] 
+    @car.features["Transmission"] = params[:transmission] 
+    @car.features["Body"] = params[:body_type]
+    @car.features["Mileage"] = params[:mileage].to_i
+    @car.features["Price"] = params[:price].to_i
 
     respond_to do |format|
       if @car.save
@@ -50,7 +53,10 @@ class CarsController < ApplicationController
   def update
     respond_to do |format|
       if @car.update(car_params)
-            @car.features["Transmission"] = params["transmission"] 
+            @car.features["Transmission"] = params[:transmission] 
+            @car.features["Body"] = params[:body_type]
+            @car.features["Mileage"] = params[:mileage].to_i
+            @car.features["Price"] = params[:price].to_i
             @car.save
         format.html { redirect_to @car, notice: 'Car was successfully updated.' }
         format.json { render :show, status: :ok, location: @car }
@@ -79,6 +85,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:brand_id, :year, :price, :mileage, :image, :features => [:transmission])
+      params.require(:car).permit(:brand_id, :year, :price, :mileage, :image, :features => [:transmission, :body_type, :mileage, :price])
     end
 end
