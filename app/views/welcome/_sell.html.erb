@@ -3,7 +3,7 @@
 		<div clas="row">
 		  <% @cars.each do |car| %>
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<%= image_tag "logo.jpg", class: "img-responsive img-thumbnail", style: "margin-bottom: 20px;" %>				
+				<%= image_tag car.image, class: "img-thumbnail", style: "height: 190px; width: 100%; margin-bottom: 20px;" %>				
 				<h5><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h5>
 				<p>Transmission: <%= car.features["Transmission"] %></p>
 				<p>Mileage: <%= car.features["Mileage"] %> miles</p>
