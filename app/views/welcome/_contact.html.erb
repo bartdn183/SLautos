@@ -2,13 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading"><span style="padding: 6px 12px; background: rgba(255,255,255, 0.9); border-radius: 13px; color: black; font-weight: 400;">Contact Us</span></h2>
+                <h2 class="section-heading"><span style="padding: 6px 12px; background: rgba(255,255,255, 0.9); border-radius: 13px; color: black; font-weight: 400;">Contact Us </span></h2>
                 <h3 class="section-subheading text-muted"></h3>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <%= form_with url: contact_form_path, id: "contactForm", method: :post, novalidate: "novalidate" do |form| %>
+                <%= form_with url: contact_form_path, local: true, method: :post, novalidate: "novalidate", id: "contact-form" do |form| %>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <%= form.text_area :name, class: "form-control", placeholder: "Your Message *", id: "message", required: true %>
+                            <%= form.text_area :message, class: "form-control", placeholder: "Your Message *", id: "message", required: true %>
                             </div>
                         </div>
                         <div class="clearfix"></div>

@@ -1,46 +1,17 @@
 <section id="sell" class="bg-light-gray">
  	<div class="container">
 		<div clas="row">
+		  <% @cars.each do |car| %>
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<%= image_tag "logo.jpg", class: "img-responsive img-thumbnail", style: "margin-bottom: 20px;" %>
-				<h4>2006 BMW3-series</h4>
-				<h5>325i Sedan</h5>
+				<%= image_tag "logo.jpg", class: "img-responsive img-thumbnail", style: "margin-bottom: 20px;" %>				
+				<h4><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h4>
 				<p>Transmission: Automatic</p>
-				<p>Mileage: 50,000 miles</p>
-				<p><b>Price: $12,000</b></p>
-				<br>
-				<%= link_to "See Details", "#", class: "btn btn-primary btn-block" %>
-			</div>	
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<%= image_tag "logo.jpg", class: "img-responsive img-thumbnail", style: "margin-bottom: 20px;" %>
-				<h4>2006 BMW3-series</h4>
-				<h5>325i Sedan</h5>
-				<p>Transmission: Automatic</p>
-				<p>Mileage: 50,000 miles</p>
-				<p><b>Price: $12,000</b></p>
+				<p>Mileage: <%= car.mileage %> miles</p>
+				<p><b>Price: <%= number_to_currency car.price %></b></p>
 				<br>
 				<%= link_to "See Details", "#", class: "btn btn-primary btn-block" %>
 			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<%= image_tag "logo.jpg", class: "img-responsive img-thumbnail", style: "margin-bottom: 20px;" %>
-				<h4>2006 BMW3-series</h4>
-				<h5>325i Sedan</h5>
-				<p>Transmission: Automatic</p>
-				<p>Mileage: 50,000 miles</p>
-				<p><b>Price: $12,000</b></p>
-				<br>
-				<%= link_to "See Details", "#", class: "btn btn-primary btn-block" %>
-			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<%= image_tag "logo.jpg", class: "img-responsive img-thumbnail", style: "margin-bottom: 20px;" %>
-				<h4>2006 BMW3-series</h4>
-				<h5>325i Sedan</h5>
-				<p>Transmission: Automatic</p>
-				<p>Mileage: 50,000 miles</p>
-				<p><b>Price: $12,000</b></p>
-				<br>
-				<%= link_to "See Details", "#", class: "btn btn-primary btn-block" %>
-			</div>		
+		  <% end %>
 		</div>
 	</div>
 </section>

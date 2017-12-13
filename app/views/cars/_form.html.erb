@@ -1,0 +1,41 @@
+<%= form_with(model: car, local: true) do |form| %>
+  <% if car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.select(:brand_id, @brands.collect{|b| [b.brand_model, b.id]}, {include_blank: "Select Brand - Model Car"}, required: true, class: "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <%= form.select(:year, @year, {include_blank: "Select Year"}, required: true, class: "form-control") %>
+  </div>
+
+    <%= form.fields_for :features do |o| %>
+
+      <h5>Transmission</h5>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade in active">
+            <div class="btn-group" data-toggle="buttons">
+                <%= o.label :features, class: "btn btn-default" do %><%= radio_button_tag "transmission", form.object.features["Transmission"] = "Automatic", required: true %> Automatic <% end %>
+              <%= o.label :features, class: "btn btn-default" do %><%= radio_button_tag "transmission", form.object.features["Transmission"] = "Manual", required: true %> Manual <% end %>
+                
+            </div>
+          </div>
+        </div>
+    <% end %>
+
+    <%= form.file_field :image %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
