@@ -8,4 +8,6 @@ class Car < ApplicationRecord
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
 	BODY_TYPE = ["Sedan", "Pick Up Truck", "Van Minivan", "Coupe", "SUV", "Wagon", "Hatchback", "Convertible", "Other"]
+	EXT_COLOR = ["Black", "White", "Grey", "Silver", "Red", "Blue"]
+	INT_COLOR = ["Black", "Brown"]
 end

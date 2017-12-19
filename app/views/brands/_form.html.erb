@@ -1,29 +1,14 @@
-<%= form_with(model: brand, local: true) do |form| %>
-  <% if brand.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(brand.errors.count, "error") %> prohibited this brand from being saved:</h2>
+<%= form_with(model: @brand, remote: true) do |form| %>
 
-      <ul>
-      <% brand.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :brand_name %>
+  <div class="form-group">
+    <%= form.text_field :name, placeholder: "Brand...", class: "form-control input-lg" %>
   </div>
 
-  <div class="field">
-    <%= form.label :model %>
-    <%= form.text_field :model, id: :brand_model %>
+  <div class="form-group">
+    <%= form.text_field :model, placeholder: "Model...", class: "form-control input-lg" %>
   </div>
-
-
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Set Brand - Model", class: "btn btn-primary btn-lg btn-block" %>
   </div>
 <% end %>

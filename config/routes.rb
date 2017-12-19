@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   #resources :car_pictures
   resources :cars
-  #resources :brands
+  resources :brands
   root 'welcome#index'
   
   post 'contact_form' => 'welcome#contact_form'

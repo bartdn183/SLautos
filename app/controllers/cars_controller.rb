@@ -2,39 +2,46 @@ class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
 
   include CarsHelper
-  # GET /cars
-  # GET /cars.json
+
   def index
     @cars = Car.all
   end
 
-  # GET /cars/1
-  # GET /cars/1.json
   def show
   end
 
-  # GET /cars/new
   def new
 
     @car = Car.new
 
+    ## Access Brands & Year Dropdown
     add_edit_car
 
   end
 
-  # GET /cars/1/edit
   def edit
+
+    ## Access Brands & Year Dropdown
     add_edit_car
   end
 
-  # POST /cars
-  # POST /cars.json
   def create
     @car = Car.new(car_params)
     @car.features["Transmission"] = params[:transmission] 
     @car.features["Body"] = params[:body_type]
     @car.features["Mileage"] = params[:mileage].to_i
     @car.features["Price"] = params[:price].to_i
+    @car.features["Exterior Color"] = params[:ext_color]
+    @car.features["Interior Color"] = params[:int_color]
+    @car.features["Fuel Type"] = params[:fuel_type]
+    @car.features["Drive Type"] = params[:drive_type]
+    @car.features["Engine"] = params[:engine]
+    @car.features["Seats"] = params[:seats]
+    @car.features["Cruise Control"] = params[:cruise_control]
+    @car.features["AC"] = params[:ac]
+    @car.features["VIN"] = params[:vin]
+    @car.features["Rear Camera"] = params[:rear_camera]
+    @car.features["Key"] = params[:key]
 
     respond_to do |format|
       if @car.save
@@ -53,11 +60,24 @@ class CarsController < ApplicationController
   def update
     respond_to do |format|
       if @car.update(car_params)
+
             @car.features["Transmission"] = params[:transmission] 
             @car.features["Body"] = params[:body_type]
             @car.features["Mileage"] = params[:mileage].to_i
             @car.features["Price"] = params[:price].to_i
+            @car.features["Exterior Color"] = params[:ext_color]
+            @car.features["Interior Color"] = params[:int_color]
+            @car.features["Fuel Type"] = params[:fuel_type]
+            @car.features["Drive Type"] = params[:drive_type]
+            @car.features["Engine"] = params[:engine]
+            @car.features["Seats"] = params[:seats]
+            @car.features["Cruise Control"] = params[:cruise_control]
+            @car.features["AC"] = params[:ac]
+            @car.features["VIN"] = params[:vin]
+            @car.features["Rear Camera"] = params[:rear_camera]
+            @car.features["Key"] = params[:key]
             @car.save
+
         format.html { redirect_to @car, notice: 'Car was successfully updated.' }
         format.json { render :show, status: :ok, location: @car }
       else
@@ -85,6 +105,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:brand_id, :year, :price, :mileage, :image, :features => [:transmission, :body_type, :mileage, :price])
+      params.require(:car).permit(:brand_id, :year, :price, :mileage, :image, :features => [:transmission, :body_type, :mileage, :price, :ext_color, :int_color, :fuel_type, :drive_type, :engine, :seats, :vin, :rear_camera])
     end
 end
