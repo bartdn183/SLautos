@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213004627) do
+ActiveRecord::Schema.define(version: 20171219140531) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 20171213004627) do
     t.integer "car_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uploaded_by"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "cars", force: :cascade do |t|
@@ -35,8 +40,7 @@ ActiveRecord::Schema.define(version: 20171213004627) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.decimal "price"
-    t.integer "mileage"
+    t.string "sale_status"
   end
 
 end

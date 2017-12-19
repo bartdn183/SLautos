@@ -1,203 +1,378 @@
-<% if @car.year.nil? %>
-  <h3>Add New Car</h3>
-<% else %>
-  <h3>Edit Car</h3>
-<% end %>
-<hr>
-<%= form_with(model: @car, remote: true) do |form| %>
-
-  <div class="form-group">
-    <%= form.select(:brand_id, @brands.collect{|b| [b.brand_model, b.id]}, {include_blank: "Select Brand - Model Car"}, required: true, class: "form-control input-lg") %>
-  </div>
-
-  <div class="form-group">
-    <%= form.select(:year, @year, {include_blank: "Select Year"}, required: true, class: "form-control input-lg") %>
-  </div>
-
-    <%= form.fields_for :features do |o| %>
-
-      <h5>Transmission</h5> 
-        <% if form.object.features.has_key?("Transmission") %>
-        Current Transmission: <%= form.object.features["Transmission"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Automatic", required: true %> Automatic <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Manual", required: true %> Manual <% end %>
-            </div>
-          </div>
-        </div>
-
-       <h5>Body Type:</h5>
-        <div class="form-group">
-          <% unless form.object.features.has_key? "Body" %>
-          <%= select_tag(:body_type, options_for_select(Car::BODY_TYPE), include_blank:"Select Body Type", class: "form-control  input-lg", required: true) %>
-          <% else %>
-           <%= select_tag(:body_type, options_for_select(Car::BODY_TYPE, form.object.features["Body"]), include_blank:"Select Body Type", class: "form-control input-lg") %>
-          <% end %>
-        </div>
-
-       <h5>Mileage:</h5>
-        <div class="form-group">
-          <%= o.label :features do %><%= number_field_tag :mileage, form.object.features["Mileage"], class: "form-control input-lg", required: true %><% end %>
-        </div>
-
-       <h5>Price:</h5>
-        <div class="form-group">
-          <%= o.label :features do %><%= number_field_tag :price, form.object.features["Price"], class: "form-control input-lg", required: true %><% end %>
-        </div>
-
-      <h5>Exterior Color:</h5>
-        <div class="form-group">
-          <% unless form.object.features.has_key? "Exterior Color" %>
-          <%= select_tag(:ext_color, options_for_select(Car::EXT_COLOR), include_blank:"Select Exterior Color", class: "form-control input-lg", required: true) %>
-          <% else %>
-           <%= select_tag(:ext_color, options_for_select(Car::EXT_COLOR, form.object.features["Exterior Color"]), include_blank:"Select Exterior Color", class: "form-control input-lg") %>
-          <% end %>
-        </div>
-
-      <h5>Interior Color:</h5>
-        <div class="form-group">
-          <% unless form.object.features.has_key? "Interior Color" %>
-          <%= select_tag(:int_color, options_for_select(Car::INT_COLOR), include_blank:"Select Interior Color", class: "form-control  input-lg", required: true) %>
-          <% else %>
-           <%= select_tag(:int_color, options_for_select(Car::INT_COLOR, form.object.features["Interior Color"]), include_blank:"Select Interior Color", class: "form-control input-lg") %>
-          <% end %>
-        </div>
-
-
-      <h5>Fuel Type</h5> 
-        <% if form.object.features.has_key?("Fuel Type") %>
-        Current Fuel Type: <%= form.object.features["Fuel Type"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :fuel_type, form.object.features["Fuel Type"] = "Gasoline", required: true %> Gasoline <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :fuel_type, form.object.features["Fuel Type"] = "Diesel", required: true %> Diesel <% end %>
-            </div>
-          </div>
-        </div>
-
-      <h5>Drive Type</h5> 
-        <% if form.object.features.has_key?("Drive Type") %>
-        Current Drive Type: <%= form.object.features["Drive Type"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "FWD", required: true %> FWD <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "4x4", required: true %> 4x4 <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "RWD", required: true %> RWD <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "AWD", required: true %> AWD <% end %>
-            </div>
-          </div>
-        </div>
-
-       <h5>Engine:</h5>
-        <div class="form-group">
-          <%= o.label :features, style: "min-width: 100% !important;" do %><%= text_field_tag :engine, form.object.features["Engine"], class: "form-control input-lg", required: true %><% end %>
-        </div>
-
-      <h5>Seats</h5> 
-        <% if form.object.features.has_key?("Seats") %>
-        Current Seats: <%= form.object.features["Seats"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :seats, form.object.features["Seats"] = "Cloth", required: true %> Cloth Seats <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :seats, form.object.features["Seats"] = "Leather", required: true %> Leather Seats<% end %>
-            </div>
-          </div>
-        </div>
-
-      <h5>Cruise Control</h5> 
-        <% if form.object.features.has_key?("Cruise Control") %>
-        Current Seats: <%= form.object.features["Cruise Control"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :cruise_control, form.object.features["Cruise Control"] = "Yes", required: true %> Yes <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :cruise_control, form.object.features["Cruise Control"] = "No", required: true %> No <% end %>
-            </div>
-          </div>
-        </div>
-
-      <h5>Airco</h5> 
-        <% if form.object.features.has_key?("AC") %>
-        Current AC Settings: <%= form.object.features["AC"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :ac, form.object.features["AC"] = "Manual", required: true %> Manual <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :ac, form.object.features["AC"] = "Climate Control", required: true %> Climate Control <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :ac, form.object.features["AC"] = "No AC", required: true %> No <% end %>
-            </div>
-          </div>
-        </div>
-
-        <h5>VIN Number:</h5>
-        <div class="form-group">
-          <%= o.label :features, style: "min-width: 100% !important;" do %><%= text_field_tag :vin, form.object.features["VIN"], class: "form-control input-lg", required: true %><% end %>
-        </div>
-
-      <h5>Rear Camera</h5> 
-        <% if form.object.features.has_key?("Rear Camera") %>
-        Current Seats: <%= form.object.features["Rear Camera"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :rear_camera, form.object.features["Rear Camera"] = "Yes", required: true %> Yes <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :rear_camera, form.object.features["Rear Camera"] = "No", required: true %> No <% end %>
-            </div>
-          </div>
-        </div>
-
-      <h5>Keys</h5> 
-        <% if form.object.features.has_key?("Key") %>
-        Current Seats: <%= form.object.features["Key"] %>
-        <br><br>
-        <% end %>
-
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active">
-            <div class="btn-group" data-toggle="buttons">
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :key, form.object.features["Key"] = "Classic Key", required: true %> Classic Key <% end %>
-                <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :key, form.object.features["Key"] = "Keyless Ignition", required: true %> Keyless Ignition <% end %>
-            </div>
-          </div>
-        </div>
-
-    <% end %>
-
-
-
-
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+  <div style="background: white; border-radius: 13px; padding: 10px;">
+  <% if @car.year.nil? %>
+    <h3 class="text-center">Add New Car</h3>
+  <% else %>
+    <h3 class="text-center">Edit Car</h3>
+  <% end %>
+  <hr>
+  <%= form_with(model: @car, remote: true, html: {multipart: true }) do |form| %>
+  <div class="row">
+      <div class="col-lg-6">
     <div class="form-group">
-        <strong>Set Main Car Picture:</strong><br>
-          <%= form.file_field :image %>
+    <h5>Select Brand - Model</h5>
+      <%= form.select(:brand_id, @brands.collect{|b| [b.brand_model, b.id]}, {include_blank: "Select Brand - Model Car"}, required: true, class: "form-control input-lg") %>
+    </div>
+    <h5>Select Model Year</h5>
+    <div class="form-group">
+      <%= form.select(:year, @year, {include_blank: "Select Year"}, required: true, class: "form-control input-lg") %>
     </div>
 
-  <div class="actions">
-    <%= form.submit "Set Car", class: "btn btn-primary btn-lg btn-block" %>
+      <%= form.fields_for :features do |o| %>
+
+        <h5>Transmission</h5> 
+          <% if form.object.features.has_key?("Transmission") %>
+          Current Transmission: <%= form.object.features["Transmission"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Automatic", required: true %> Automatic <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Manual", required: true %> Manual <% end %>
+              </div>
+            </div>
+          </div>
+
+         <h5>Body Type:</h5>
+          <div class="form-group">
+            <% unless form.object.features.has_key? "Body" %>
+            <%= select_tag(:body_type, options_for_select(Car::BODY_TYPE), include_blank:"Select Body Type", class: "form-control  input-lg", required: true) %>
+            <% else %>
+             <%= select_tag(:body_type, options_for_select(Car::BODY_TYPE, form.object.features["Body"]), include_blank:"Select Body Type", class: "form-control input-lg") %>
+            <% end %>
+          </div>
+
+         <h5>Mileage:</h5>
+          <div class="form-group">
+            <%= o.label :features do %><%= number_field_tag :mileage, form.object.features["Mileage"], class: "form-control input-lg", required: true %><% end %>
+          </div>
+
+         <h5>Price:</h5>
+          <div class="form-group">
+            <%= o.label :features do %><%= number_field_tag :price, form.object.features["Price"], class: "form-control input-lg", required: true %><% end %>
+          </div>
+
+        <h5>Exterior Color:</h5>
+          <div class="form-group">
+            <% unless form.object.features.has_key? "Exterior Color" %>
+            <%= select_tag(:ext_color, options_for_select(Car::EXT_COLOR), include_blank:"Select Exterior Color", class: "form-control input-lg", required: true) %>
+            <% else %>
+             <%= select_tag(:ext_color, options_for_select(Car::EXT_COLOR, form.object.features["Exterior Color"]), include_blank:"Select Exterior Color", class: "form-control input-lg") %>
+            <% end %>
+          </div>
+
+        <h5>Interior Color:</h5>
+          <div class="form-group">
+            <% unless form.object.features.has_key? "Interior Color" %>
+            <%= select_tag(:int_color, options_for_select(Car::INT_COLOR), include_blank:"Select Interior Color", class: "form-control  input-lg", required: true) %>
+            <% else %>
+             <%= select_tag(:int_color, options_for_select(Car::INT_COLOR, form.object.features["Interior Color"]), include_blank:"Select Interior Color", class: "form-control input-lg") %>
+            <% end %>
+          </div>
+
+
+        <h5>Fuel Type</h5> 
+          <% if form.object.features.has_key?("Fuel Type") %>
+          Current Fuel Type: <%= form.object.features["Fuel Type"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :fuel_type, form.object.features["Fuel Type"] = "Gasoline", required: true %> Gasoline <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :fuel_type, form.object.features["Fuel Type"] = "Diesel", required: true %> Diesel <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Drive Type</h5> 
+          <% if form.object.features.has_key?("Drive Type") %>
+          Current Drive Type: <%= form.object.features["Drive Type"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "FWD", required: true %> FWD <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "4x4", required: true %> 4x4 <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "RWD", required: true %> RWD <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :drive_type, form.object.features["Drive Type"] = "AWD", required: true %> AWD <% end %>
+              </div>
+            </div>
+          </div>
+
+         <h5>Engine:</h5>
+          <div class="form-group">
+            <%= o.label :features, style: "min-width: 100% !important;" do %><%= text_field_tag :engine, form.object.features["Engine"], class: "form-control input-lg", required: true %><% end %>
+          </div>
+
+        <h5>Seats</h5> 
+          <% if form.object.features.has_key?("Seats") %>
+          Current Seats: <%= form.object.features["Seats"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :seats, form.object.features["Seats"] = "Cloth", required: true %> Cloth Seats <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :seats, form.object.features["Seats"] = "Leather", required: true %> Leather Seats<% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Cruise Control</h5> 
+          <% if form.object.features.has_key?("Cruise Control") %>
+          Cruise Control Available: <%= form.object.features["Cruise Control"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :cruise_control, form.object.features["Cruise Control"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :cruise_control, form.object.features["Cruise Control"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Airco</h5> 
+          <% if form.object.features.has_key?("AC") %>
+          Current AC Settings: <%= form.object.features["AC"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :ac, form.object.features["AC"] = "Manual", required: true %> Manual <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :ac, form.object.features["AC"] = "Climate Control", required: true %> Climate Control <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :ac, form.object.features["AC"] = "No AC", required: true %> No AC<% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" style="border-left: 3px solid #f8f8f8;">
+
+          <h5>VIN Number</h5>
+          <div class="form-group">
+            <%= o.label :features, style: "min-width: 100% !important;" do %><%= text_field_tag :vin, form.object.features["VIN"], class: "form-control input-lg", required: true %><% end %>
+          </div>
+
+
+        <h5>Rear Camera</h5> 
+          <% if form.object.features.has_key?("Rear Camera") %>
+          Rear Camera Available: <%= form.object.features["Rear Camera"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :rear_camera, form.object.features["Rear Camera"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :rear_camera, form.object.features["Rear Camera"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Navigation</h5> 
+          <% if form.object.features.has_key?("Navigation") %>
+          Navigation Avalaible: <%= form.object.features["Navigation"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :navigation, form.object.features["Navigation"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :navigation, form.object.features["Navigation"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>CD Player</h5> 
+          <% if form.object.features.has_key?("CD Player") %>
+          CD Player Avalaible: <%= form.object.features["CD Player"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :cd_player, form.object.features["CD Player"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :cd_player, form.object.features["CD Player"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Bluetooth</h5> 
+          <% if form.object.features.has_key?("Bluetooth") %>
+          Bluetooth Avalaible: <%= form.object.features["Bluetooth"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :bluetooth, form.object.features["Bluetooth"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :bluetooth, form.object.features["Bluetooth"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>USB</h5> 
+          <% if form.object.features.has_key?("USB") %>
+          USB Avalaible: <%= form.object.features["USB"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :usb, form.object.features["USB"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :usb, form.object.features["USB"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>12V Plug</h5> 
+          <% if form.object.features.has_key?("12 Volt Plug") %>
+          12 Volt Plug Avalaible: <%= form.object.features["12 Volt Plug"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :plug_12v, form.object.features["12 Volt Plug"] = "1x Front", required: true %> 1x Front <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :plug_12v, form.object.features["12 Volt Plug"] = "2x Front", required: true %> 2x Front <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :plug_12v, form.object.features["12 Volt Plug"] = "1x Front & 1x Rear", required: true %> 1x Front & 1x Rear <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Keys</h5> 
+          <% if form.object.features.has_key?("Key") %>
+          Current Key: <%= form.object.features["Key"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :key, form.object.features["Key"] = "Classic Key", required: true %> Classic Key <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :key, form.object.features["Key"] = "Classic Key with Remote", required: true %> Classic Key w/ Remote <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :key, form.object.features["Key"] = "Keyless Ignition", required: true %> Keyless Ignition <% end %>
+              </div>
+            </div>
+          </div>
+
+      <h5>Power Windows</h5> 
+          <% if form.object.features.has_key?("Power Windows") %>
+          Power Windows Avalaible: <%= form.object.features["Power Windows"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :power_windows, form.object.features["Power Windows"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :power_windows, form.object.features["Power Windows"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Power Door Locks</h5> 
+          <% if form.object.features.has_key?("Power Door Locks") %>
+          Power Windows Avalaible: <%= form.object.features["Power Door Locks"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :power_door_locks, form.object.features["Power Door Locks"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :power_door_locks, form.object.features["Power Door Locks"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Power Exterior Mirrors</h5> 
+          <% if form.object.features.has_key?("Power Exterior Mirrors") %>
+          Power Exterior Mirrors Avalaible: <%= form.object.features["Power Exterior Mirrors"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :power_exterior_mirror, form.object.features["Power Exterior Mirrors"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :power_exterior_mirror, form.object.features["Power Exterior Mirrors"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+        <h5>Exterior Mirror Heating</h5> 
+          <% if form.object.features.has_key?("Exterior Mirror Heating") %>
+          Exterior Mirror Heating Avalaible: <%= form.object.features["Exterior Mirror Heating"] %>
+          <br><br>
+          <% end %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+              <div class="btn-group" data-toggle="buttons">
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :exterior_mirror_heating, form.object.features["Exterior Mirror Heating"] = "Yes", required: true %> Yes <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :exterior_mirror_heating, form.object.features["Exterior Mirror Heating"] = "No", required: true %> No <% end %>
+              </div>
+            </div>
+          </div>
+
+      <% end %>
+
+      <br>
+      <div class="form-group">
+            <%= form.label :image do %>SET CAR PROFILE PICTURE:<% end %><br>
+            <%= form.file_field :image, class: "form-control input-lg" %>
+      </div>
+
+      <div class="form-group">
+        <strong>UPLOAD CAR GALLERY PICTURES:</strong>
+        <%= file_field_tag "images[]", type: :file, multiple: true, class: "form-control input-lg" %>
+      </div>
+
+          <% if @car.year.nil? %>
+    <%= form.hidden_field :sale_status, value: "For Sale" %>
+    <% else %>
+      <h5>CAR SALE STATUS</h5>
+         <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active">
+                  <div class="btn-group" data-toggle="buttons">
+                      <%= form.label :sale_status, class: "btn btn-default btn-lg" do %>
+                        <%= form.radio_button :sale_status, "For Sale", required: true %>
+                        For Sale
+                      <% end %>
+                      <%= form.label :sale_status, class: "btn btn-default btn-lg" do %>
+                        <%= form.radio_button :sale_status, "Sold", required: true %>
+                        Sold
+                      <% end %>
+                  </div>
+            </div>
+          </div>
+    <% end %>
+    </div>
   </div>
-<% end %>
+  <hr>
+
+    <div class="actions">
+      <%= form.submit "Set Car", class: "btn btn-primary btn-xl btn-block" %>
+    </div>
+
+  <% end %>
+</div>
+  </div>
+</div>

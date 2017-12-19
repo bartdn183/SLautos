@@ -1,5 +1,5 @@
 class Car < ApplicationRecord
-	has_many :car_pictures
+	has_many :car_pictures, dependent: :destroy
 	belongs_to :brand
 
 	serialize :features, Hash
@@ -10,4 +10,5 @@ class Car < ApplicationRecord
 	BODY_TYPE = ["Sedan", "Pick Up Truck", "Van Minivan", "Coupe", "SUV", "Wagon", "Hatchback", "Convertible", "Other"]
 	EXT_COLOR = ["Black", "White", "Grey", "Silver", "Red", "Blue"]
 	INT_COLOR = ["Black", "Brown"]
+
 end
