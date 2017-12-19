@@ -83,3 +83,11 @@ section.devise {
         color: $theme-danger;
     }
 }
+
+.carousel-inner > .item {
+    position: relative;
+    -webkit-transition: 0.6s ease-in-out left;
+    -moz-transition: 0.6s ease-in-out left;
+    -o-transition: 0.6s ease-in-out left;
+    transition: 0.6s ease-in-out left;
+}
