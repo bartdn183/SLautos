@@ -3,15 +3,34 @@
 		<div clas="row">
 		  <% @cars.each do |car| %>
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<%= image_tag car.image, class: "img-thumbnail", style: "height: 190px; width: 100%; max-width: 260px;margin-bottom: 20px;" %>				
-				<h5><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h5>
+				<%= image_tag car.image, class: "img-thumbnail", style: "height: 190px; width: 100%; max-width: 260px;margin-bottom: 20px;" %>
+				<table class="table">
+					<tr>				
+						<td style="border-top: none !important;" colspan="2"><h5><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h5></td>
+					</tr>
 				<% if car.features.has_key?("Transmission") %>
-				<p>Transmission: <%= car.features["Transmission"] %></p>
+					<tr>
+						<td style="border-top: none !important;">Transmission: </td>
+						<td style="border-top: none !important;"><%= car.features["Transmission"] %></td>
+					</tr>
 				<% end %>
-				<p>Mileage: <%= car.features["Mileage"] %> miles</p>
-				<p><b>Price: <%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></b></p>
+				<% if car.features.has_key?("Fuel Type") %>
+        			<tr>
+        				<td style="border-top: none !important;">Fuel Type: </td>
+        				<td style="border-top: none !important;"><%= car.features["Fuel Type"] %></td>
+        			</tr>
+        		<% end %>
+					<tr>
+						<td style="border-top: none !important;">Mileage: </td>
+						<td style="border-top: none !important;"><%= car.features["Mileage"] %> miles</td>
+					</tr>
+					<tr>
+						<td style="border-top: none !important;"><b>Price: </b></td>
+						<td style="border-top: none !important;"><b><%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></b></td>
+					</tr>
+				</table>
 				<br>
-				<a href="#" class= "btn btn-primary btn-block" style="margin-bottom: 20px;" data-toggle="modal" data-target="#myModal_<%= car.id %>">See Details</a>
+				<a href="#" class= "btn btn-primary btn-lg btn-block" style="margin-bottom: 20px;" data-toggle="modal" data-target="#myModal_<%= car.id %>">See Details</a>
 			</div>
 							<!-- Modal -->
 				<div class="modal fade" id="myModal_<%= car.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -186,7 +205,7 @@
 				        </div>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Close</button>
 				      </div>
 				    </div>
 				  </div>
