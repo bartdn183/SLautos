@@ -19,6 +19,6 @@ class WelcomeController < ApplicationController
   private
 
   def all_cars
-  	@cars = Car.all
+  	@cars = Car.where(sale_status: "For Sale")
   end
 end
