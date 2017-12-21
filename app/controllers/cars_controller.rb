@@ -32,7 +32,7 @@ class CarsController < ApplicationController
 
      if params[:images]
         params[:images].each { |image|
-          @car.car_images.create(image: image, uploaded_by: "Bart De Nef", car_id: @car.id)
+          @car.car_pictures.create(image: image, uploaded_by: "Bart De Nef", car_id: @car.id)
         }
       end
 
@@ -49,7 +49,7 @@ class CarsController < ApplicationController
 
     if params[:images]
       params[:images].each { |image|
-        @car.car_images.create(image: image, uploaded_by: "Bart De Nef", car_id: @car.id)
+        @car.car_pictures.create(image: image, uploaded_by: "Bart De Nef", car_id: @car.id)
       }
     end
     @car.save
