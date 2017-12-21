@@ -1,35 +1,37 @@
-<h3 class="text-center">All Brand - Models</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Brand</th>
-      <th>Model</th>
-      <th>For Sale</th>
-      <th>Sold</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+<h3 class="text-center">All Brand - Models</h3>
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Brand - Model</th>
+            <th>For Sale</th>
+            <th>Sold</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @brands.each do |brand| %>
-      <tr>
-        <td><%= brand.name %></td>
-        <td><%= brand.model %></td>
-        <td><% counter = 0 %>
-            <% brand.cars.where(sale_status: "For Sale").each do %>
-                <% counter += 1 %>
-            <% end %>
-            <%= counter %>
-        </td>
-        <td><% counter = 0 %>
-            <% brand.cars.where(sale_status: "Sold").each do %>
-                <% counter += 1 %>
-            <% end %>
-            <%= counter %>
-        </td>
-        <td><%= link_to 'Edit', edit_brand_path(brand), remote: true %></td>
-        <td><%= link_to 'Destroy', brand, remote: true , method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @brands.each do |brand| %>
+            <tr>
+              <td class="align-middle"><h4><%= brand.name %> <%= brand.model %></h4></td>
+              <td class="align-middle"><% counter = 0 %>
+                  <% brand.cars.where(sale_status: "For Sale").each do %>
+                      <% counter += 1 %>
+                  <% end %>
+                  <%= counter %>
+              </td>
+              <td class="align-middle"><% counter = 0 %>
+                  <% brand.cars.where(sale_status: "Sold").each do %>
+                      <% counter += 1 %>
+                  <% end %>
+                  <%= counter %>
+              </td>
+              <td class="align-middle"><%= link_to 'Edit', edit_brand_path(brand), remote: true, class: "btn btn-warning", style: "width: 75px;" %></td>
+              <td class="align-middle"><%= link_to 'Destroy', brand, remote: true , method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "width: 75px;" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

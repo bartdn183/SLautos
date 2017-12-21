@@ -1,17 +1,17 @@
 <%= render 'navbar' %>
 <div class="jumbotron" style="background: #f8f8f8; padding-left: 1%; padding-right: 1%; padding-top: 70px;">
   <div class="row">
-      <div class="col-lg-3">
-        <%= link_to new_car_path, remote: true, class: "btn btn-primary btn-block" do %> <span class="glyphicon glyphicon-plus"></span> Add New Car <% end %>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+        <%= link_to new_car_path, remote: true, class: "btn btn-primary btn-lg btn-block", style: "margin-bottom: 5px;" do %> <span class="glyphicon glyphicon-plus"></span> Add Car <% end %>
       </div>
-      <div class="col-lg-3">
-        <%= link_to cars_path, remote: true, class: "btn btn-primary btn-block" do %> <i class="fa fa-car fa-fw"></i></span> All Car Profiles <% end %>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+        <%= link_to cars_path, remote: true, class: "btn btn-primary btn-lg btn-block", style: "margin-bottom: 5px;" do %> <i class="fa fa-car fa-fw"></i></span> All Cars <% end %>
       </div>
-      <div class="col-lg-3">
-        <%= link_to new_brand_path, remote: true, class: "btn btn-default btn-block" do %> <span class="glyphicon glyphicon-plus"></span> Add New Brand - Model <% end %>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+        <%= link_to new_brand_path, remote: true, class: "btn btn-default btn-lg btn-block", style: "margin-bottom: 5px;" do %> <span class="glyphicon glyphicon-plus"></span> Add Brand & Model <% end %>
       </div>
-      <div class="col-lg-3">
-        <%= link_to brands_path, remote: true, class: "btn btn-default btn-block" do %> <i class="fa fa-car fa-fw"></i></span> All Brand - Models <% end %>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+        <%= link_to brands_path, remote: true, class: "btn btn-default btn-lg btn-block" do %> <i class="fa fa-car fa-fw"></i></span> All Brand - Models <% end %>
       </div>
   </div>
   <hr style="margin: 10px 0;">

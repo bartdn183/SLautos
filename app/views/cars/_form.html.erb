@@ -84,9 +84,10 @@
             <div role="tabpanel" class="tab-pane fade in active">
               <div class="btn-group" data-toggle="buttons">
                   <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :fuel_type, form.object.features["Fuel Type"] = "Gasoline" %> Gasoline <% end %>
-                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :fuel_type, form.object.features["Fuel Type"] = "Diesel"
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :fuel_type, form.object.features["Fuel Type"] = "Diesel"%> Diesel <% end %>
             </div>
           </div>
+        </div>
 
         <h5>Drive Type</h5> 
           <% if form.object.features.has_key?("Drive Type") %>
