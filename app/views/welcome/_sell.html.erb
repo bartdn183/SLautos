@@ -27,7 +27,7 @@
 				        	<div class="col-lg-6">
 				        		<p>Transmission: <%= car.features["Transmission"] %></p>
 								<p>Mileage: <%= car.features["Mileage"] %> miles</p>
-								<p><strong>PRICE: <%= number_to_currency car.features["Price"] %></strong></p>
+								<p><strong>PRICE: <%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></strong></p>
 
 				        	</div>
 				        	<div class="col-lg-6">

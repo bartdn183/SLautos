@@ -8,23 +8,25 @@
       <th>Price</th>
       <th>Mileage</th>
       <th>Sale Status</th>
-      <th>Sale Date</th>
-      <th colspan="3"></th>
+      <th>Sold Date</th>
+      <th>Main Picture</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @cars.each do |car| %>
       <tr>
-        <td><%= car.brand.name %> <%= car.brand.model %></td>
-        <td><%= car.year %></td>
-        <td><%= number_to_currency car.features["Price"] %></td>
-        <td><%= car.features["Mileage"] %></td>
-        <td><%= car.sale_status %></td>
-        <td><% unless car.sale_date.nil? %><%= car.sale_date.strftime('%Y-%m-%d at %H:%M') %><% end %></td>
-        <td><%= link_to 'Show', car %></td>
-        <td><%= link_to 'Edit', edit_car_path(car), remote: true %></td>
-        <td><%= link_to 'Destroy', car, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="align-middle"><h5><%= car.brand.name %> <%= car.brand.model %></h5></td>
+        <td class="align-middle"><%= car.year %></td>
+        <td class="align-middle"><%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></td>
+        <td class="align-middle"><%= car.features["Mileage"] %></td>
+        <td class="align-middle"><%= car.sale_status %></td>
+        <td class="align-middle"><% unless car.sale_date.nil? %><%= car.sale_date.strftime('%Y-%m-%d at %H:%M') %><% end %></td>
+        <td class="align-middle"><%= image_tag car.image, style: "height: 50px; width: 100%; max-width: 80px;" %></td>
+        <td class="hidden"><%= link_to 'Show', car %></td>
+        <td class="align-middle"><%= link_to 'Edit', edit_car_path(car), remote: true, class: "btn btn-warning btn-lg" %></td>
+        <td class="align-middle"><%= link_to 'Destroy', car, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-lg" %></td>
       </tr>
     <% end %>
   </tbody>

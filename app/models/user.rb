@@ -251,4 +251,17 @@ class User < ApplicationRecord
   "Zambia",
   "Zimbabwe"
 ]
+
+  def admin?
+    role == "admin"
+  end
+
+  def guest?
+    role == "guest"
+  end
+
+  def pending?
+    role == "pending"
+  end
+
 end

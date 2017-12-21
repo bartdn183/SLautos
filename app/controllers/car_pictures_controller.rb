@@ -1,8 +1,8 @@
 class CarPicturesController < ApplicationController
   before_action :set_car_picture, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  # GET /car_pictures
-  # GET /car_pictures.json
+
+  authorize_resource
   def index
     @car_pictures = CarPicture.all
   end

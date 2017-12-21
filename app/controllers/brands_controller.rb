@@ -3,6 +3,8 @@ class BrandsController < ApplicationController
   before_action :all_brands, only: [:index, :create, :update, :destroy]
   before_action :authenticate_user!
 
+  authorize_resource
+
   def new
     @brand = Brand.new
   end

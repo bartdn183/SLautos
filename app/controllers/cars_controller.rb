@@ -2,6 +2,8 @@ class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
   before_action :all_cars, only: [:index, :create, :update, :destroy]
   before_action :authenticate_user!
+
+  authorize_resource
   
   include CarsHelper
 
@@ -61,7 +63,7 @@ class CarsController < ApplicationController
   private
 
     def all_cars
-      @cars = Car.order(sale_status: :asc)
+      @cars = Car.order(sale_status: :asc, created_at: :desc)
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_car
