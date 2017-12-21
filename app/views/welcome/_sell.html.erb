@@ -7,11 +7,42 @@
 				<h5><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h5>
 				<p>Transmission: <%= car.features["Transmission"] %></p>
 				<p>Mileage: <%= car.features["Mileage"] %> miles</p>
-				<h5>Price: <%= number_to_currency car.features["Price"] %></b></h5>
+				<h5><b>Price: <%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></b></h5>
 				<br>
-				<%= link_to "See Details", "#", class: "btn btn-primary btn-block", style: "margin-bottom: 20px;" %>
+				<a href="#" class= "btn btn-primary btn-block" style="margin-bottom: 20px;" data-toggle="modal" data-target="#myModal_<%= car.id %>">See Details</a>
 			</div>
+							<!-- Modal -->
+				<div class="modal fade" id="myModal_<%= car.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title text-center" id="myModalLabel"><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h4>
+				      </div>
+				      <div class="modal-body">
+				      	<div class="row">
+				      		<div class="col-lg-12">
+				        		<%= image_tag car.image, class: "img-thumbnail", style: "height: 350px; width: 100%; margin-bottom: 20px;" %>
+				        	</div>
+				        	<div class="col-lg-6">
+				        		<p>Transmission: <%= car.features["Transmission"] %></p>
+								<p>Mileage: <%= car.features["Mileage"] %> miles</p>
+								<p><strong>PRICE: <%= number_to_currency car.features["Price"] %></strong></p>
+
+				        	</div>
+				        	<div class="col-lg-6">
+
+				        	</div>
+				        </div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 		  <% end %>
 		</div>
 	</div>
 </section>
+

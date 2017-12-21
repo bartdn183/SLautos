@@ -5,12 +5,10 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <div style="margin-top: -13px;">
-            <%= link_to "#page-top", class: "navbar-brand page-scroll" do %>
+            <%= link_to "#page-top", class: "navbar-brand page-scroll", style: "padding: 0 0 0 15px;" do %>
                 
-            <%= image_tag "logo.jpg", size: 45, style: "display:inline;", class: "img-rounded" %> <span style="color: #e60000; font-size: 40px; font-family: 'Tangerine', cursive; font-weight: 700;">SL</span><span style="color: white; font-size: 30px;font-family: 'Tangerine', cursive; font-weight: 700;"> Autos</span> <% end %>
+            <%= image_tag "logo.jpg", size: 50, style: "display:inline; vertical-align: -13px;", class: "img-rounded" %> <span style="color: #e60000; font-size: 40px; font-family: 'Tangerine', cursive; font-weight: 700; margin-left: 10px;">SL</span><span style="color: white; font-size: 30px;font-family: 'Tangerine', cursive; font-weight: 700;"> Autos</span> <% end %>
                
-            </div>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,13 +18,13 @@
                     <%= link_to "", "#page-top" %>
                 </li>
                 <li>
+                    <%= link_to "Services", "#services", class: "page-scroll" %>
+                </li>
+                <li>
                     <%= link_to "Sell", "#sell", class: "page-scroll"  %>
                 </li>
                 <li>
                     <%= link_to "Buy", "#buy", class: "page-scroll"  %>
-                </li>
-                <li>
-                    <%= link_to "Services", "#services", class: "page-scroll" %>
                 </li>
                 <li>
                     <%= link_to "Team", "#team", class: "page-scroll" %>

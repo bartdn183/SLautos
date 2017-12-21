@@ -1,0 +1,55 @@
+<div id="devise-box">
+  <div id="signup-box">
+    <h2 class="text-center" style="margin: 0;">Sign Up</h2>
+    <hr style="margin: 10px 0 20px 0;">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :role, value: "pending" %>
+  <div class="form-group">
+    <%= f.text_field :firstname, autofocus: true , class: "form-control input-lg", placeholder: "first name...", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :lastname, class: "form-control input-lg", placeholder: "last name...", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :city, class: "form-control input-lg", placeholder: "city...", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.select(:country,User::COUNTRIES, {include_blank: "Select Country"},class: "form-control input-lg", required: true) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.all, {include_blank: "Select Time Zone"}, class: "form-control input-lg", required: true) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.select(:locale,[["Español", "es"],["English", "en"]], {include_blank: "Select Language"},class: "form-control input-lg", required: true) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.email_field :email, class: "form-control input-lg", placeholder: "email..." %>
+  </div>
+
+  <div class="form-group">
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg", placeholder: "password..." %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-lg", placeholder: "password confirmation..." %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up", class: "btn btn-primary btn-block btn-xl" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>
+</div>

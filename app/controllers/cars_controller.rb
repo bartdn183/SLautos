@@ -1,7 +1,8 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
   before_action :all_cars, only: [:index, :create, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   include CarsHelper
 
   def show
@@ -24,31 +25,8 @@ class CarsController < ApplicationController
 
   def create
     @car = Car.create(car_params)
-    @car.features["Transmission"] = params[:transmission] 
-    @car.features["Body"] = params[:body_type]
-    @car.features["Mileage"] = params[:mileage].to_i
-    @car.features["Price"] = params[:price].to_i
-    @car.features["Exterior Color"] = params[:ext_color]
-    @car.features["Interior Color"] = params[:int_color]
-    @car.features["Fuel Type"] = params[:fuel_type]
-    @car.features["Drive Type"] = params[:drive_type]
-    @car.features["Engine"] = params[:engine]
-    @car.features["Seats"] = params[:seats]
-    @car.features["Cruise Control"] = params[:cruise_control]
-    @car.features["AC"] = params[:ac]
-    @car.features["VIN"] = params[:vin]
-    @car.features["Rear Camera"] = params[:rear_camera]
-    @car.features["Navigation"] = params[:navigation]
-    @car.features["CD Player"] = params[:cd_player]
-    @car.features["Bluetooth"] = params[:bluetooth]
-    @car.features["USB"] = params[:usb]
-    @car.features["12 Volt Plug"] = params[:plug_12v]
-    @car.features["Key"] = params[:key]
-    @car.features["Power Windows"] = params[:power_windows]
-    @car.features["Power Door Locks"] = params[:power_door_locks]
-    @car.features["Power Exterior Mirrors"] = params[:power_exterior_mirror]
-    @car.features["Exterior Mirror Heating"] = params[:exterior_mirror_heating]
 
+    features_hash(@car)
 
      if params[:images]
         params[:images].each { |image|
@@ -60,33 +38,9 @@ class CarsController < ApplicationController
   end
 
   def update
-      @car = @car.update(car_params)
-
-      @car.features["Transmission"] = params[:transmission] 
-      @car.features["Body"] = params[:body_type]
-      @car.features["Mileage"] = params[:mileage].to_i
-      @car.features["Price"] = params[:price].to_i
-      @car.features["Exterior Color"] = params[:ext_color]
-      @car.features["Interior Color"] = params[:int_color]
-      @car.features["Fuel Type"] = params[:fuel_type]
-      @car.features["Drive Type"] = params[:drive_type]
-      @car.features["Engine"] = params[:engine]
-      @car.features["Seats"] = params[:seats]
-      @car.features["Cruise Control"] = params[:cruise_control]
-      @car.features["AC"] = params[:ac]
-      @car.features["VIN"] = params[:vin]
-      @car.features["Rear Camera"] = params[:rear_camera]
-      @car.features["Navigation"] = params[:navigation]
-      @car.features["CD Player"] = params[:cd_player]
-      @car.features["Bluetooth"] = params[:bluetooth]
-      @car.features["USB"] = params[:usb]
-      @car.features["12 Volt Plug"] = params[:plug_12v]
-      @car.features["Key"] = params[:key]
-      @car.features["Power Windows"] = params[:power_windows]
-      @car.features["Power Door Locks"] = params[:power_door_locks]
-      @car.features["Power Exterior Mirrors"] = params[:power_exterior_mirror]
-      @car.features["Exterior Mirror Heating"] = params[:exterior_mirror_heating]
-      @car.save
+    @car.update(car_params)
+      
+    features_hash(@car)
 
     if params[:images]
       params[:images].each { |image|
