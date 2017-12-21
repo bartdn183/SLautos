@@ -12,7 +12,8 @@ gem 'jquery-rails'
 gem 'jquery-easing-rails'
 gem 'awesome_print', require: "ap"
 gem 'cancancan'
-gem 'aws-sdk', '~> 2.3'
+gem 'aws-sdk-v1'
+gem 'aws-sdk', '~> 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use Puma as the app server
