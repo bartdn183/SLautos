@@ -3,11 +3,13 @@
 		<div clas="row">
 		  <% @cars.each do |car| %>
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<%= image_tag car.image, class: "img-thumbnail", style: "height: 190px; width: 100%; margin-bottom: 20px;" %>				
+				<%= image_tag car.image, class: "img-thumbnail", style: "height: 190px; width: 100%; max-width: 260px;margin-bottom: 20px;" %>				
 				<h5><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h5>
+				<% if car.features.has_key?("Transmission") %>
 				<p>Transmission: <%= car.features["Transmission"] %></p>
+				<% end %>
 				<p>Mileage: <%= car.features["Mileage"] %> miles</p>
-				<h5><b>Price: <%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></b></h5>
+				<p><b>Price: <%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></b></p>
 				<br>
 				<a href="#" class= "btn btn-primary btn-block" style="margin-bottom: 20px;" data-toggle="modal" data-target="#myModal_<%= car.id %>">See Details</a>
 			</div>
@@ -24,17 +26,162 @@
 				      		<div class="col-lg-12">
 				        		<%= image_tag car.image, class: "img-rounded", style: "height: 350px; width: 100%; margin-bottom: 20px;" %>
 				        	</div>
-				        	<div class="col-lg-6">
-				        		<% if car.features.has_key?("Transmission") %>
-				        		<p>Transmission: <%= car.features["Transmission"] %></p>
+				        </div>
+				        <div class="row">
+				        	<div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
+				        	  <table class="table">
+				        	  	<% if car.features.has_key?("Transmission") %>
+				        			<tr> 
+				        				<td style="border-top: none !important;">Transmission: </td>
+				        				<td style="border-top: none !important;"><%= car.features["Transmission"] %></td>
+				        			</tr>
 				        		<% end %>
-								<p>Mileage: <%= car.features["Mileage"] %> miles</p>
-								<p><strong>PRICE: <%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></strong></p>
-
-
+				        		<% if car.features.has_key?("Fuel Type") %>
+				        			<tr>
+				        				<td style="border-top: none !important;">Fuel Type: </td>
+				        				<td style="border-top: none !important;"><%= car.features["Fuel Type"] %></td>
+				        			</tr>
+				        		<% end %>
+									<tr>
+										<td style="border-top: none !important;">Mileage: </td>
+										<td style="border-top: none !important;"><%= car.features["Mileage"] %> miles</td>
+									</tr>
+									<tr>
+										<td style="border-top: none !important;"><strong>PRICE: </strong></td>
+										<td style="border-top: none !important;"><strong><%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></strong></td>
+									</tr>
+								</table>
+				        	</div>
+				        </div>
+				        <hr style="margin: 10px 0;">
+				        <div class="row">
+				        	<div class="col-lg-12">
+				        		<h4 class="text-center">All Features</h4>
+				        	</div>
+				        </div>
+				        <hr style="margin: 10px 0;">
+				        <div class="row">
+				        	<div class="col-lg-6">
+				        		<table class="table table-striped">
+				        			<tr>
+				        				<td><b>Body Type: </b></td>
+				        				<td><%= car.features["Body Type"] %></td>
+				        			</tr>
+				        			<tr>
+				        				<td><b>Exterior Color: </b></td>
+				        				<td><%= car.features["Exterior Color"] %></td>
+				        			</tr>
+				        			<tr>
+				        				<td><b>Interior Color: </b></td>
+				        				<td><%= car.features["Interior Color"] %></td>
+				        			</tr>
+				        		<% if car.features.has_key?("Drive Type") %>
+				        			<tr>
+				        				<td><b>Drive Type: </b></td>
+				        				<td><%= car.features["Drive Type"] %></td>
+				        			</tr>
+				        		<% end %>
+				        			<tr>
+				        				<td><b>Engine: </b></td>
+				        				<td><%= car.features["Engine"] %></td>
+				        			</tr>
+				        		<% if car.features.has_key?("Seats") %>
+				        			<tr>
+				        				<td><b>Seats: </b></td>
+				        				<td><%= car.features["Seats"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features["Cruise Control"] == "Yes" %>
+				        			<tr>
+				        				<td><b>Cruise Control: </b></td>
+				        				<td><%= car.features["Cruise Control"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("AC") %>
+				        			<tr>
+				        				<td><b>Airco: </b></td>
+				        				<td><%= car.features["AC"] %></td>
+				        			</tr>
+				        		<% end %>
+				        			<tr>
+				        				<td><b>VIN Number: </b></td>
+				        				<td><%= car.features["VIN"] %></td>
+				        			</tr>
+				        		<% if car.features.has_key?("12 Volt Plug") %>
+				        			<tr>
+				        				<td><b>12 Volt Plug: </b></td>
+				        				<td><%= car.features["12 Volt Plug"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("Key") %>
+				        			<tr>
+				        				<td><b>Key: </b></td>
+				        				<td><%= car.features["Key"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		</table>
 				        	</div>
 				        	<div class="col-lg-6">
+				        		<table class="table table-striped">
+				        		<% if car.features.has_key?("Rear Camera") && car.features["Rear Camera"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>Rear Camera: </b></td>
+				        				<td><%= car.features["Rear Camera"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("Navigation") && car.features["Navigation"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>Navigation: </b></td>
+				        				<td><%= car.features["Navigation"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("CD Player") && car.features["CD Player"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>CD Player: </b></td>
+				        				<td><%= car.features["CD Player"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("Bluetooth") && car.features["Bluetooth"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>Bluetooth: </b></td>
+				        				<td><%= car.features["Bluetooth"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("USB") && car.features["USB"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>USB: </b></td>
+				        				<td><%= car.features["USB"] %></td>
+				        			</tr>
+				        		<% end %>
 
+				        		<% if car.features.has_key?("Power Windows") && car.features["Power Windows"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>Power Windows: </b></td>
+				        				<td><%= car.features["Power Windows"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("Power Door Locks") && car.features["Power Door Locks"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>Power Door Locks: </b></td>
+				        				<td><%= car.features["Power Door Locks"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("Power Exterior Mirrors") && car.features["Power Exterior Mirrors"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>Power Exterior Mirrors: </b></td>
+				        				<td><%= car.features["Power Exterior Mirrors"] %></td>
+				        			</tr>
+				        		<% end %>
+				        		<% if car.features.has_key?("Exterior Mirror Heating") && car.features["Exterior Mirror Heating"] == "Yes"  %>
+				        			<tr>
+				        				<td><b>Exterior Mirror Heating: </b></td>
+				        				<td><%= car.features["Exterior Mirror Heating"] %></td>
+				        			</tr>
+				        		<% end %>
+
+
+
+				        	</table>
 				        	</div>
 				        </div>
 				      </div>
