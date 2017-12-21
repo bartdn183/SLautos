@@ -1,58 +1,60 @@
 <h3 class="text-center">All Cars</h3>
 <hr>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Brand - Model</th>
-      <th>Year</th>
-      <th>Price</th>
-      <th>Mileage</th>
-      <th>Sale Status</th>
-      <th>Sold Date</th>
-      <th>Main Picture</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cars.each do |car| %>
+<div style="background: white; border-radius: 13px; padding: 10px;">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td class="align-middle"><h4><%= car.brand.name %> <%= car.brand.model %></h4></td>
-        <td class="align-middle"><%= car.year %></td>
-        <td class="align-middle"><%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></td>
-        <td class="align-middle"><%= car.features["Mileage"] %></td>
-        <td class="align-middle"><%= car.sale_status %></td>
-        <td class="align-middle"><% unless car.sale_date.nil? %><%= car.sale_date.strftime('%Y-%m-%d at %H:%M') %><% end %></td>
-        <td class="align-middle">
-          
-        <a href="#" data-toggle="modal" data-target="#myModal_<%= car.id %>"><%= image_tag car.image, style: "height: 50px; width: 100%; max-width: 80px;" %></a>
-      </div>
-              <!-- Modal -->
-        <div class="modal fade" id="myModal_<%= car.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title text-center" id="myModalLabel"><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h4>
-              </div>
-              <div class="modal-body">
-                    <%= image_tag car.image, class: "img-rounded", style: "height: 350px; width: 100%;" %>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <th>Brand - Model</th>
+        <th>Year</th>
+        <th>Price</th>
+        <th>Mileage</th>
+        <th>Sale Status</th>
+        <th>Sold Date</th>
+        <th>Main Picture</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @cars.each do |car| %>
+        <tr>
+          <td class="align-middle"><h4><%= car.brand.name %> <%= car.brand.model %></h4></td>
+          <td class="align-middle"><%= car.year %></td>
+          <td class="align-middle"><%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></td>
+          <td class="align-middle"><%= car.features["Mileage"] %></td>
+          <td class="align-middle"><%= car.sale_status %></td>
+          <td class="align-middle"><% unless car.sale_date.nil? %><%= car.sale_date.strftime('%Y-%m-%d at %H:%M') %><% end %></td>
+          <td class="align-middle">
+            
+          <a href="#" data-toggle="modal" data-target="#myModal_<%= car.id %>"><%= image_tag car.image, style: "height: 50px; width: 100%; max-width: 80px;" %></a>
+        </div>
+                <!-- Modal -->
+          <div class="modal fade" id="myModal_<%= car.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title text-center" id="myModalLabel"><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h4>
+                </div>
+                <div class="modal-body">
+                      <%= image_tag car.image, class: "img-rounded", style: "height: 350px; width: 100%;" %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
 
 
 
-        </td>
-        <td class="hidden"><%= link_to 'Show', car %></td>
-        <td class="align-middle"><%= link_to 'Edit', edit_car_path(car), remote: true, class: "btn btn-warning", style: "width: 75px;" %></td>
-        <td class="align-middle"><%= link_to 'Destroy', car, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "width: 75px;" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          </td>
+          <td class="hidden"><%= link_to 'Show', car %></td>
+          <td class="align-middle"><%= link_to 'Edit', edit_car_path(car), remote: true, class: "btn btn-warning", style: "width: 75px;" %></td>
+          <td class="align-middle"><%= link_to 'Destroy', car, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "width: 75px;" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
