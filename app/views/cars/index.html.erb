@@ -5,16 +5,16 @@
         <%= link_to new_car_path, remote: true, class: "btn btn-primary btn-block" do %> <span class="glyphicon glyphicon-plus"></span> Add New Car <% end %>
       </div>
       <div class="col-lg-3">
-        <%= link_to new_brand_path, remote: true, class: "btn btn-primary btn-block" do %> <span class="glyphicon glyphicon-plus"></span> Add New Brand - Model <% end %>
-      </div>
-      <div class="col-lg-3">
         <%= link_to cars_path, remote: true, class: "btn btn-primary btn-block" do %> <i class="fa fa-car fa-fw"></i></span> All Car Profiles <% end %>
       </div>
       <div class="col-lg-3">
-        <%= link_to brands_path, remote: true, class: "btn btn-primary btn-block" do %> <i class="fa fa-car fa-fw"></i></span> All Brand - Models <% end %>
+        <%= link_to new_brand_path, remote: true, class: "btn btn-default btn-block" do %> <span class="glyphicon glyphicon-plus"></span> Add New Brand - Model <% end %>
+      </div>
+      <div class="col-lg-3">
+        <%= link_to brands_path, remote: true, class: "btn btn-default btn-block" do %> <i class="fa fa-car fa-fw"></i></span> All Brand - Models <% end %>
       </div>
   </div>
-  <hr style="margin: 10px 0 0 0;">
+  <hr style="margin: 10px 0;">
   <div class="row">
     <div class="col-md-12">
 

@@ -38,7 +38,10 @@ class CarsController < ApplicationController
   end
 
   def update
+    @car_sale_status = @car.sale_status
     @car.update(car_params)
+
+    car_sale_date(@car_sale_status, @car)
       
     features_hash(@car)
 
@@ -47,6 +50,7 @@ class CarsController < ApplicationController
         @car.car_images.create(image: image, uploaded_by: "Bart De Nef", car_id: @car.id)
       }
     end
+    @car.save
 
   end
 
@@ -57,7 +61,7 @@ class CarsController < ApplicationController
   private
 
     def all_cars
-      @cars = Car.all
+      @cars = Car.order(sale_status: :asc)
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_car
@@ -66,6 +70,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:brand_id, :year, :sale_status, :image, :features => [:transmission, :body_type, :mileage, :price, :ext_color, :int_color, :fuel_type, :drive_type, :engine, :seats, :vin, :rear_camera, :navigation, :cd_player, :bluetooth, :usb, :plug_12v, :key, :power_windows, :power_door_locks, :power_exterior_mirror, :exterior_mirror_heating])
+      params.require(:car).permit(:brand_id, :year, :sale_status, :sale_date, :image, :features => [:transmission, :body_type, :mileage, :price, :ext_color, :int_color, :fuel_type, :drive_type, :engine, :seats, :vin, :rear_camera, :navigation, :cd_player, :bluetooth, :usb, :plug_12v, :key, :power_windows, :power_door_locks, :power_exterior_mirror, :exterior_mirror_heating])
     end
 end

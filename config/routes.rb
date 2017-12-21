@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   #resources :car_pictures
   resources :cars
-  resources :brands
+  resources :brands, except: [:show]
   root 'welcome#index'
   
   post 'contact_form' => 'welcome#contact_form'
