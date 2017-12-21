@@ -23,7 +23,32 @@
         <td class="align-middle"><%= car.features["Mileage"] %></td>
         <td class="align-middle"><%= car.sale_status %></td>
         <td class="align-middle"><% unless car.sale_date.nil? %><%= car.sale_date.strftime('%Y-%m-%d at %H:%M') %><% end %></td>
-        <td class="align-middle"><%= image_tag car.image, style: "height: 50px; width: 100%; max-width: 80px;" %></td>
+        <td class="align-middle">
+          
+        <a href="#" data-toggle="modal" data-target="#myModal_<%= car.id %>"><%= image_tag car.image, style: "height: 50px; width: 100%; max-width: 80px;" %></a>
+      </div>
+              <!-- Modal -->
+        <div class="modal fade" id="myModal_<%= car.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel"><%= car.year %> <%= car.brand.name %> <%= car.brand.model %></h4>
+              </div>
+              <div class="modal-body">
+                    <%= image_tag car.image, class: "img-rounded", style: "height: 350px; width: 100%;" %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        </td>
         <td class="hidden"><%= link_to 'Show', car %></td>
         <td class="align-middle"><%= link_to 'Edit', edit_car_path(car), remote: true, class: "btn btn-warning", style: "width: 75px;" %></td>
         <td class="align-middle"><%= link_to 'Destroy', car, remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "width: 75px;" %></td>

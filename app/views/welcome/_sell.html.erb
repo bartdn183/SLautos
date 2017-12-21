@@ -25,9 +25,12 @@
 				        		<%= image_tag car.image, class: "img-rounded", style: "height: 350px; width: 100%; margin-bottom: 20px;" %>
 				        	</div>
 				        	<div class="col-lg-6">
+				        		<% if car.features.has_key?("Transmission") %>
 				        		<p>Transmission: <%= car.features["Transmission"] %></p>
+				        		<% end %>
 								<p>Mileage: <%= car.features["Mileage"] %> miles</p>
 								<p><strong>PRICE: <%= number_to_currency(car.features["Price"].to_f, :precision => (car.features["Price"].to_f.round == car.features["Price"].to_f) ? 0 : 2 ) %></strong></p>
+
 
 				        	</div>
 				        	<div class="col-lg-6">
