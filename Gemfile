@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'jquery-easing-rails'
 gem 'awesome_print', require: "ap"
 gem 'cancancan'
-gem 'aws-sdk', '~> 2.3'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use Puma as the app server
@@ -62,6 +62,7 @@ group :development do
 end
 
 group :production do
+  gem 'aws-sdk', '~> 2.3'
   gem 'pg'
 end
 
