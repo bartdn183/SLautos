@@ -47,6 +47,19 @@ $(document).on('turbolinks:load', function() {
 	    pause: "false" /* Change to true to make it paused when your mouse cursor enter the background */
 	});
 
+	$('.carousel-indicators li').click(function(e){
+        e.stopPropagation();
+        var goTo = $(this).data('slide-to');
+        $('.carousel-inner .item').each(function(index){
+            if($(this).data('id') == goTo){
+                goTo = index;
+                return false;
+            }
+        });
+
+        $('#carousel-example-generic2').carousel(goTo); 
+    });
+
 });
 
 
