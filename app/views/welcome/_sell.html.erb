@@ -49,31 +49,40 @@
 				        </div>
 				       <% else %>
 
+				       		<% new_array = [] %>
+
+				       		<% new_array.push(car.image) %>
+
+				       		<% car.car_pictures.each_with_index do |picture| %>
+				       			<% new_array.push(picture.image) %>
+				       		<% end %>
+
 
 				       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 							  <!-- Indicators -->
 							  <ol class="carousel-indicators">
-							  	<li data-target="#carousel-example-generic" data-slide-to="-1" class="active"></li>
-							    <% car.car_pictures.each_with_index do |picture, index| %>
+							    <% new_array.each_with_index do |picture, index| %>
+							     <% if index == 0 %>
+							      <li data-target="#carousel-example-generic" data-slide-to="<%= index %>" class="active"></li>
+							     <% else %>
 							      <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
+							     <% end %>
 							    <% end %>
 							  </ol>
 
 							  <!-- Wrapper for slides -->
 							  <div class="carousel-inner" role="listbox">
 
-							  	 <div class="item active">
-							       <%= image_tag car.image, class: "img-rounded", style: "height: 350px; width: 100%; margin-bottom: 20px;" %>
-								      <div class="carousel-caption">
-								        ...
-								      </div>
-								  </div>
-							  	
-							    <% car.car_pictures.each_with_index do |picture, index| %>
-
-							     <div class="item">
-							        <%= image_tag picture.image, class: "img-rounded", style: "height: 350px; width: 100%; margin-bottom: 20px;" %>
-							     </div>
+							    <% new_array.each_with_index do |picture, index| %>
+							     <% if index == 0 %>
+								     <div class="item active">
+								       <%= image_tag picture, class: "img-rounded", style: "height: 350px; width: 100%; margin-bottom: 20px;" %>
+									  </div>
+								 <% else %>
+									     <div class="item">
+									        <%= image_tag picture, class: "img-rounded", style: "height: 350px; width: 100%; margin-bottom: 20px;" %>
+									     </div>
+								 <% end %>
 							    <% end %>
 							  </div>
 
