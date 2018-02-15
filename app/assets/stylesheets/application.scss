@@ -39,5 +39,17 @@
 .navbar-custom {
 	background: rgba(0,0,0,0.8);
 	padding-top: 8px;
-	padding-bottom :8px;
+	padding-bottom: 8px;
+}
+
+.carousel-control.left, 
+.carousel-control.right {
+    background-image: none !important;
+}
+
+.carousel-inner > .item {
+    -webkit-transition: 1.8s ease-in-out;
+    -moz-transition: 1.8s ease-in-out;
+    -o-transition: 1.8s ease-in-out;
+    transition: 1.8s ease-in-out;
 }

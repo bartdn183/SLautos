@@ -30,8 +30,8 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active">
               <div class="btn-group" data-toggle="buttons">
-                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Automatic" %> Automatic <% end %>
-                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Manual"%> Manual <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Automatic", required: true %> Automatic <% end %>
+                  <%= o.label :features, class: "btn btn-default btn-lg" do %><%= radio_button_tag :transmission, form.object.features["Transmission"] = "Manual", required: true  %> Manual <% end %>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-module CarsHelper
+ module CarsHelper
 
 	def add_edit_car
 	   @brands = Brand.order(name: :asc)

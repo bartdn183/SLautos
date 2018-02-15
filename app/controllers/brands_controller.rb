@@ -11,6 +11,8 @@ class BrandsController < ApplicationController
 
   def create
     Brand.create(brand_params)
+
+    render :new
   end
 
   def update
